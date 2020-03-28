@@ -8,6 +8,6 @@ class Leaderboard extends StatefulWidget {
 class _LeaderboardState extends State<Leaderboard> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Text('Leaderboard');
   }
 }

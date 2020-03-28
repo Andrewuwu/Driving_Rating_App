@@ -8,6 +8,6 @@ class Map extends StatefulWidget {
 class _MapState extends State<Map> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(child: Text('map'));
   }
 }
