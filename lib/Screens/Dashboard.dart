@@ -9,16 +9,8 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              Container(
-                child: Text('Avg Drive Score'),
-              ),
-            ],
-          ),
-        ],
+      body: Column(
+        children: <Widget>[],
       ),
     );
   }
