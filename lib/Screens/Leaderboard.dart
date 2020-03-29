@@ -6,56 +6,60 @@ class Leaderboard extends StatefulWidget {
 }
 
 class _LeaderboardState extends State<Leaderboard> {
-  final List<String> _names = <String>[
-    'Andrew',
-    'John' 'Bob' 'Cameron' 'Bill' 'Vincent' 'Samuel' 'Art' 'Lucas'
-  ];
-  final List<String> _points = <String>[
-    '10000',
-    '1234' '235' '195' '187' '124' '97' '64' '0'
-  ];
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color.fromRGBO(35, 35, 35, 10),
+      appBar: AppBar(
+        title:
+            Text('Daily                   Weekly                   All Time'),
+        backgroundColor: Colors.lightBlueAccent,
+      ),
+      body: _createRank(context),
+    );
+  }
+
+  Widget _createRank(BuildContext context) {
+    final names = [
+      'Andrew',
+      'Anton',
+      'Bob',
+      'Cameron',
+      'Vincent',
+      'Samuel',
+      'Art',
+      'Lucas'
+    ];
+    final stats = ['92', '88', '86', '73', '69', '68', '42', '13'];
+    final profile = [
+      '0.jpg',
+      '8.jpg',
+      '11.jpg',
+      '29.jpg',
+      'profile.jpg',
+      '79.jpg',
+      '98.jpg',
+      '99.jpg'
+    ];
     return Container(
-      decoration: BoxDecoration(shape: BoxShape.circle),
-      padding: EdgeInsets.all(10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          RaisedButton(
-            child: Text('Weekly'),
-            onPressed: () {
-              _displayRanking();
-            },
-          ),
-          RaisedButton(
-            child: Text('Monthly'),
-            onPressed: () {},
-          ),
-          RaisedButton(
-            child: Text('All Time'),
-            onPressed: () {
-              _displayRanking();
-            },
-          ),
-        ],
+      height: 400,
+      child: ListView.builder(
+        itemCount: names.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(names[index],
+                style: TextStyle(
+                    fontSize: 24, color: Color.fromRGBO(192, 192, 192, 10))),
+            leading: CircleAvatar(
+                backgroundImage: AssetImage('assets/${profile[index]}')),
+            trailing: Text(
+              stats[index],
+              style: TextStyle(
+                  fontSize: 24, color: Color.fromRGBO(192, 192, 192, 10)),
+            ),
+          );
+        },
       ),
     );
-  }
-
-  Widget _displayRanking() {
-    return ListView(
-      children: <Widget>[_buildRanking()],
-    );
-  }
-
-  Widget _buildRanking() {
-    for (int i = 0; i < _names.length; i++) {
-      return ListTile(
-        leading: Icon(Icons.account_circle),
-        title: Text(_names[i]),
-        subtitle: Text('points' + _points[i]),
-      );
-    }
   }
 }
