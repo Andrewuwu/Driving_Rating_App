@@ -88,7 +88,10 @@ class _LeaderboardState extends State<Leaderboard> {
                 child: Text(
                   'Daily',
                   style: TextStyle(
-                      fontSize: 32, color: Color.fromRGBO(192, 192, 192, 10)),
+                      fontSize: 32,
+                      color: index == 1
+                          ? Colors.white
+                          : Color.fromRGBO(192, 192, 192, 10)),
                 ),
               ),
               GestureDetector(
@@ -100,7 +103,10 @@ class _LeaderboardState extends State<Leaderboard> {
                 child: Text(
                   'Weekly',
                   style: TextStyle(
-                      fontSize: 32, color: Color.fromRGBO(192, 192, 192, 10)),
+                      fontSize: 32,
+                      color: index == 2
+                          ? Colors.white
+                          : Color.fromRGBO(192, 192, 192, 10)),
                 ),
               ),
               GestureDetector(
@@ -112,7 +118,10 @@ class _LeaderboardState extends State<Leaderboard> {
                 child: Text(
                   'All Time',
                   style: TextStyle(
-                      fontSize: 32, color: Color.fromRGBO(192, 192, 192, 10)),
+                      fontSize: 32,
+                      color: index == 3
+                          ? Colors.white
+                          : Color.fromRGBO(192, 192, 192, 10)),
                 ),
               ),
             ],
@@ -137,13 +146,18 @@ class _LeaderboardState extends State<Leaderboard> {
           return ListTile(
             title: Text(name[index],
                 style: TextStyle(
-                    fontSize: 24, color: Color.fromRGBO(192, 192, 192, 10))),
+                    fontWeight:
+                        index == 0 ? FontWeight.bold : FontWeight.normal,
+                    fontSize: index == 0 ? 30 : 24,
+                    color: index == 0 ? Colors.amber[400] : Colors.white)),
             leading: CircleAvatar(
                 backgroundImage: AssetImage('assets/${profilePic[index]}')),
             trailing: Text(
               num[index],
               style: TextStyle(
-                  fontSize: 24, color: Color.fromRGBO(192, 192, 192, 10)),
+                  fontWeight: index == 0 ? FontWeight.bold : FontWeight.normal,
+                  fontSize: index == 0 ? 30 : 24,
+                  color: index == 0 ? Colors.amber[400] : Colors.white),
             ),
           );
         },

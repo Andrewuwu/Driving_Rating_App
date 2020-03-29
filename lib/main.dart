@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:drivingratingapp/Screens/Navigator.dart';
-import 'package:drivingratingapp/Screens/Leaderboard.dart';
-import 'package:drivingratingapp/Screens/Dashboard.dart';
-import 'package:drivingratingapp/Screens/Map.dart';
 import 'package:drivingratingapp/Screens/Login.dart';
+import 'package:flutter/material.dart';
+import 'package:drivingratingapp/Screens/Navigation.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: Login(),
     );
   }
 }
