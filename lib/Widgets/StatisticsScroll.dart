@@ -8,20 +8,18 @@ class StatisticsScroll extends StatefulWidget {
 class _StatisticsScrollState extends State<StatisticsScroll> {
   int selectedIndex = 0;
   final List<String> categories = [
-    'Avg Drive Time',
-    'Percentile',
     'Braking Score',
     'Turning Score',
     'Parking Score',
     'Speed Score'
   ];
-  final List<int> scores = [70, 85, 92, 76, 78, 96];
+  final List<int> scores = [92, 76, 78, 96];
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250.0,
-      color: Color.fromRGBO(0, 0, 0, 0.8),
+      height: 244.0,
+      color: Color.fromRGBO(0, 0, 0, 0.85),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
@@ -32,7 +30,7 @@ class _StatisticsScrollState extends State<StatisticsScroll> {
               children: <Widget>[
                 Container(
                   width: 170.0,
-                  height: 160.0,
+                  height: 154.0,
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     color: Colors.white,

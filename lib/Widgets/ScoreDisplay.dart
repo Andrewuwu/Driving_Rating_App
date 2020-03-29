@@ -6,7 +6,7 @@ class ScoreDisplay extends StatefulWidget {
 }
 
 class _ScoreDisplayState extends State<ScoreDisplay> {
-  final List<int> scores = [70, 85, 92, 76, 78, 96];
+  final List<int> scores = [92, 76, 78, 85];
   double avgdouble;
   int avg;
 
@@ -18,17 +18,18 @@ class _ScoreDisplayState extends State<ScoreDisplay> {
       children: <Widget>[
         Expanded(
           child: Container(
-            height: 254.0,
-            color: Color.fromRGBO(0, 0, 0, 0.8),
+            height: 260.0,
+            color: Color.fromRGBO(0, 0, 0, 0.85),
             child: Column(
               children: <Widget>[
                 Text(''),
                 Text(
                   'Drive Score',
                   style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromRGBO(0, 230, 255, 100)),
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(0, 230, 255, 100),
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 Text(''),
@@ -36,9 +37,22 @@ class _ScoreDisplayState extends State<ScoreDisplay> {
                   height: 175.0,
                   width: 175.0,
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(0, 0, 0, 0),
+                    color: Color.fromRGBO(35, 35, 35, 1.0),
                     shape: BoxShape.circle,
-                    border: Border.all(),
+                    boxShadow: [
+                      BoxShadow(
+                          color: avg < 70
+                              ? Colors.red
+                              : avg < 80
+                                  ? Colors.deepOrange
+                                  : avg < 90
+                                      ? Colors.yellow
+                                      : avg < 101
+                                          ? Colors.lightGreenAccent
+                                          : Colors.grey,
+                          blurRadius: 10.0,
+                          spreadRadius: 4.0),
+                    ],
                   ),
                   child: Align(
                     alignment: Alignment.center,
