@@ -18,8 +18,8 @@ class _StatisticsScrollState extends State<StatisticsScroll> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 244.0,
-      color: Color.fromRGBO(0, 0, 0, 0.85),
+      height: MediaQuery.of(context).size.height * 224 / 640,
+      color: Color.fromRGBO(31, 31, 31, 1.0),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
@@ -30,7 +30,7 @@ class _StatisticsScrollState extends State<StatisticsScroll> {
               children: <Widget>[
                 Container(
                   width: 170.0,
-                  height: 154.0,
+                  height: MediaQuery.of(context).size.height * 125 / 600,
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     color: Colors.white,
@@ -49,7 +49,10 @@ class _StatisticsScrollState extends State<StatisticsScroll> {
                         categories[index],
                         style: TextStyle(fontSize: 19.0),
                       ),
-                      Text(''),
+                      Text(
+                        '',
+                        style: TextStyle(fontSize: 6.3),
+                      ),
                       Stack(
                         children: <Widget>[
                           Text(

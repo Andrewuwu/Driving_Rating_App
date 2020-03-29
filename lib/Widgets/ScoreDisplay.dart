@@ -18,8 +18,8 @@ class _ScoreDisplayState extends State<ScoreDisplay> {
       children: <Widget>[
         Expanded(
           child: Container(
-            height: 260.0,
-            color: Color.fromRGBO(0, 0, 0, 0.85),
+            height: MediaQuery.of(context).size.height * 35 / 80,
+            color: Color.fromRGBO(0, 0, 0, 0.1),
             child: Column(
               children: <Widget>[
                 Text(''),
@@ -51,7 +51,7 @@ class _ScoreDisplayState extends State<ScoreDisplay> {
                                           ? Colors.lightGreenAccent
                                           : Colors.grey,
                           blurRadius: 10.0,
-                          spreadRadius: 4.0),
+                          spreadRadius: 2.0),
                     ],
                   ),
                   child: Align(
