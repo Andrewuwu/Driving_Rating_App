@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:drivingratingapp/Widgets/ScoreDisplay.dart';
+import 'package:drivingratingapp/Widgets/StatisticsScroll.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -10,7 +12,10 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: <Widget>[],
+        children: <Widget>[
+          ScoreDisplay(),
+          StatisticsScroll(),
+        ],
       ),
     );
   }
