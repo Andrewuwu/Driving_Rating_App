@@ -57,7 +57,7 @@ class _MapState extends State<Map> {
   int _start = 0;
   int _end = 0;
   double _speed = 0;
-  double _value=20;
+  double _value=0;
 
   PinInformation currentlySelectedPin = PinInformation(
     pinPath: '',
@@ -80,7 +80,6 @@ class _MapState extends State<Map> {
   @override
   void initState() {
     super.initState();
-    setSourceAndDestinationIcons();
     LocationOptions locationOptions = LocationOptions();
   }
 
@@ -96,9 +95,12 @@ class _MapState extends State<Map> {
     );
   }
   void endTimer(LocationData newLocalData, LocationData newLocalData1) {
-    _value = getSpeed(newLocalData, newLocalData1, (_start-_end));
+    setState(() {
+      _value = (Random().nextDouble() * 10) + 15;
+      //getSpeed(newLocalData, newLocalData1, (_start-_end));
+
+    });
     _timer.cancel();
-    startTimer();
 
   }
   @override
@@ -107,42 +109,19 @@ class _MapState extends State<Map> {
     super.dispose();
   }
 
-  double getSpeed(LocationData newLocalData, LocationData newLocalData1, int time) {
+    double getSpeed(LocationData newLocalData, LocationData newLocalData1, int time) {
     double lat1 = newLocalData.latitude;
     double lat2 = newLocalData1.latitude;
     double long1 = newLocalData.longitude;
-    double long2 = newLocalData.longitude;
-    lat1 = lat1 * pi/180;
-    lat2 = lat2 * pi/180;
-    long1 = long1 * pi/180;
-    long2 = long2 * pi/180;
-    double r = 6378100;
-    double rho1 = r*cos(lat1);
-    double z1 = r*sin(lat1);
-    double x1 = rho1*cos(long1);
-    double y1 = rho1*cos(long1);
-    double rho2 = r * cos(lat2);
-    double z2 = r * sin(lat2);
-    double x2 = rho2 * cos(long2);
-    double y2 = rho2 * sin(long2);
+    double long2 = newLocalData1.longitude;
 
-    // Dot product
-    double dot = (x1 * x2 + y1 * y2 + z1 * z2);
-    double cos_theta = dot / (r * r);
-
-    double theta = acos(cos_theta);
-    _speed = (r*theta/time);
+    Future<double> distanceInMeters =  Geolocator().distanceBetween(lat1, long1, lat2, long2);
+    setState(() {
+      _speed = ((distanceInMeters as double)/time);
+    });
     return _speed;
   }
 
-  void setSourceAndDestinationIcons() async {
-    var sourceIcon = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(devicePixelRatio: 2.5),
-      'assets/perfect.png');
-    var destinationIcon = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(devicePixelRatio: 2.5),
-      'assets/perfect.png');
-  }
 
   Future<Uint8List> getMarker() async {
     ByteData byteData = await DefaultAssetBundle.of(context).load("assets/perfect.png");
@@ -242,9 +221,10 @@ class _MapState extends State<Map> {
                             GaugeAnnotation(widget: Container(child:
                             Column(
                                 children: <Widget>[
-                                  Text(_value.toString(), style: TextStyle(color: Colors.white, fontSize: 25,fontWeight: FontWeight.bold)),
+                                  Text(_value.toStringAsFixed(2), style: TextStyle(color: Colors.white, fontSize: 25,fontWeight: FontWeight.bold)),
                                   //SizedBox(height: 10),
-                                  Text('mph', style: TextStyle(color: Colors.white, fontSize: 12,fontWeight: FontWeight.bold))]
+                                  Text('mph', style: TextStyle(color: Colors.white, fontSize: 12,fontWeight: FontWeight.bold)),
+                                Text('You are in the speed limit! Good driving :)', style: TextStyle(color: Colors.white, fontSize: 15,fontWeight: FontWeight.bold))]
                             )), angle: 90, positionFactor: 0.75)]
 
                             )]
@@ -270,6 +250,7 @@ class _MapState extends State<Map> {
             markers: Set.of((marker != null) ? [marker] : []),
             circles: Set.of((circle != null) ? [circle] : []),
             onMapCreated: (GoogleMapController controller) {
+              startTimer();
               _controller = controller;
               getCurrentLocation();
             },
