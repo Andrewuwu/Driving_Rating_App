@@ -130,7 +130,7 @@ class _LeaderboardState extends State<Leaderboard> {
   Widget _createRank(BuildContext context, List<String> name, List<String> num,
       List<String> profilePic) {
     return Container(
-      height: 500,
+      height: MediaQuery.of(context).size.height * 0.7,
       child: ListView.builder(
         itemCount: name.length,
         itemBuilder: (context, index) {
