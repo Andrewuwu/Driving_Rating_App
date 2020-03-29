@@ -2,7 +2,6 @@ import 'package:drivingratingapp/Screens/Leaderboard.dart';
 import 'package:drivingratingapp/Screens/Dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:drivingratingapp/Screens/Map.dart';
-import 'package:drivingratingapp/Screens/Login.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);

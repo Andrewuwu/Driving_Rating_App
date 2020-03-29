@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 
 class Map extends StatefulWidget {
@@ -19,10 +18,10 @@ class _MapState extends State<Map> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            if(_currentPosition!= null)
-            Text(
-              _currentAddress,
-            ),
+            if (_currentPosition != null)
+              Text(
+                _currentAddress,
+              ),
             FlatButton(
               child: Text("Get location"),
               onPressed: () {
@@ -34,8 +33,8 @@ class _MapState extends State<Map> {
       ),
     );
   }
-  _getCurrentLocation() {
 
+  _getCurrentLocation() {
     geolocator
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
         .then((Position position) {
@@ -58,15 +57,16 @@ class _MapState extends State<Map> {
 
       setState(() {
         _currentAddress =
-        "${place.locality}, ${place.postalCode}, ${place.country}";
+            "${place.locality}, ${place.postalCode}, ${place.country}";
       });
     } catch (e) {
       print(e);
     }
   }
-  _getSpeed() async {
-    double distance = await Geolocator().distanceBetween(52.2165157, 6.9437819, 52.3546274, 4.8285838);
-    return (distance/2);
 
+  _getSpeed() async {
+    double distance = await Geolocator()
+        .distanceBetween(52.2165157, 6.9437819, 52.3546274, 4.8285838);
+    return (distance / 2);
   }
 }
