@@ -14,6 +14,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: double.infinity,
         color: Color.fromRGBO(25, 22, 55, 1),
         /* decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -32,35 +33,23 @@ class _LoginState extends State<Login> {
           child: SingleChildScrollView(
             physics: AlwaysScrollableScrollPhysics(),
             padding: EdgeInsets.symmetric(
-              vertical: 40.0,
-              horizontal: 60.0,
+              vertical: 30.0,
+              horizontal: 40.0,
             ),
             child: Column(
               children: <Widget>[
-                SizedBox(
-                  height: 10,
-                ),
-
                 Container(
-                  /*decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 6.0,
-                          offset: Offset(0, 2),
-                        ),
-                      ]),*/
+                  width: 400,
+                  height: 350,
                   child: Image(
                     image: AssetImage('assets/final_logo.jpg'),
+                    fit: BoxFit.cover,
+                    colorBlendMode: BlendMode.overlay,
                   ),
-                ),
-                SizedBox(
-                  height: 50,
                 ),
 
                 Container(
-                  height: 35,
+                  height: 40,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(9.0),
@@ -84,8 +73,7 @@ class _LoginState extends State<Login> {
 
                 //username
                 Container(
-                  height: 35,
-                  width: 300,
+                  height: 40,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(9.0),
@@ -104,6 +92,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 //password
+
                 SizedBox(
                   height: 60,
                 ),
