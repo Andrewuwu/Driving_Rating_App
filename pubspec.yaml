@@ -51,6 +51,16 @@ flutter:
     - assets/perfect.png
   #  - images/a_dot_ham.jpeg
 
+    - assets/final_logo.jpg
+    - assets/0.jpg
+    - assets/8.jpg
+    - assets/11.jpg
+    - assets/29.jpg
+    - assets/79.jpg
+    - assets/98.jpg
+    - assets/99.jpg
+    - assets/profile.jpg
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
