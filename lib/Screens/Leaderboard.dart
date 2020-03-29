@@ -24,9 +24,7 @@ class _LeaderboardState extends State<Leaderboard> {
         children: <Widget>[
           RaisedButton(
             child: Text('Weekly'),
-            onPressed: () {
-              _displayRanking();
-            },
+            onPressed: () {},
           ),
           RaisedButton(
             child: Text('Monthly'),
@@ -34,28 +32,10 @@ class _LeaderboardState extends State<Leaderboard> {
           ),
           RaisedButton(
             child: Text('All Time'),
-            onPressed: () {
-              _displayRanking();
-            },
+            onPressed: () {},
           ),
         ],
       ),
     );
-  }
-
-  Widget _displayRanking() {
-    return ListView(
-      children: <Widget>[_buildRanking()],
-    );
-  }
-
-  Widget _buildRanking() {
-    for (int i = 0; i < _names.length; i++) {
-      return ListTile(
-        leading: Icon(Icons.account_circle),
-        title: Text(_names[i]),
-        subtitle: Text('points' + _points[i]),
-      );
-    }
   }
 }

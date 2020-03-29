@@ -39,8 +39,8 @@ class _LoginState extends State<Login> {
             child: Column(
               children: <Widget>[
                 Container(
-                  width: 400,
-                  height: 350,
+                  width: 300,
+                  height: 300,
                   child: Image(
                     image: AssetImage('assets/final_logo.jpg'),
                     fit: BoxFit.cover,
@@ -94,7 +94,7 @@ class _LoginState extends State<Login> {
                 //password
 
                 SizedBox(
-                  height: 60,
+                  height: 70,
                 ),
                 SizedBox(
                   width: 400,
@@ -106,10 +106,11 @@ class _LoginState extends State<Login> {
                       'LOGIN',
                       style: TextStyle(
                           color: Color.fromRGBO(35, 35, 35, 1.0),
-                          letterSpacing: 3.0),
+                          letterSpacing: 3.0,
+                          fontSize: 20.0),
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32),
+                      borderRadius: BorderRadius.circular(30),
                     ),
                     onPressed: () => Navigator.push(context,
                         MaterialPageRoute(builder: (context) => MyHomePage())),
