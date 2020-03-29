@@ -23,27 +23,35 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Driving Rater')),
+        appBar: AppBar(
+          titleSpacing: 100.0,
+          backgroundColor: Color.fromRGBO(25, 22, 55, 1),
+          title: Text(
+            'SafeSpeed',
+            style: TextStyle(fontFamily: 'Calibri'),
+          ),
+        ),
         body: _pages[_selectedTab],
         bottomNavigationBar: BottomNavigationBar(
             currentIndex: _selectedTab,
-            backgroundColor: Colors.white70,
+            backgroundColor: Color.fromRGBO(35, 35, 35, 1.0),
             type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                title: Text("Dashboard"),
-                backgroundColor: Colors.blueAccent,
+                icon: Icon(Icons.home, color: Colors.white),
+                title: Text("Dashboard", style: TextStyle(color: Colors.white)),
+                backgroundColor: Colors.white70,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                title: Text("Map"),
-                backgroundColor: Colors.blue,
+                icon: Icon(Icons.search, color: Colors.white),
+                title: Text("Map", style: TextStyle(color: Colors.white)),
+                backgroundColor: Colors.white70,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.star),
-                title: Text("Leaderboard"),
-                backgroundColor: Colors.lightBlue,
+                icon: Icon(Icons.star, color: Colors.white),
+                title:
+                    Text("Leaderboard", style: TextStyle(color: Colors.white)),
+                backgroundColor: Colors.white70,
               ),
             ],
             onTap: (int index) {
