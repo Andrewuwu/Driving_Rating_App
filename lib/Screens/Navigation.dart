@@ -24,8 +24,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          titleSpacing: 100.0,
           backgroundColor: Color.fromRGBO(25, 22, 55, 1),
-          title: Text('Driving Rater'),
+          title: Text(
+            'SafeSpeed',
+            style: TextStyle(fontFamily: 'Calibri'),
+          ),
         ),
         body: _pages[_selectedTab],
         bottomNavigationBar: BottomNavigationBar(
