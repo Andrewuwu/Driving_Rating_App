@@ -20,26 +20,31 @@ class Map extends StatefulWidget {
 }
 
 class _MapState extends State<Map> {
+
   StreamSubscription _locationSubscription;
   Location _locationTracker = Location();
   Marker marker;
   Circle circle;
-  GoogleMapController mapController;
-  final LatLng _initialPosition = const LatLng(45.521, -122.677);
-  final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
-  Position _currentPosition;
-  String _currentAddress;
+  GoogleMapController _controller;
 
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
+  static final CameraPosition initialLocation = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    bearing: CAMERA_BEARING,
+    tilt: CAMERA_TILT,
+    zoom: CAMERA_ZOOM,
+  );
+
+  Future<Uint8List> getMarker() async {
+    ByteData byteData = await DefaultAssetBundle.of(context).load("assets/car_icon.png");
+    return byteData.buffer.asUint8List();
   }
 
-  /*void updateMarkerAndCircle(LocationData newLocalData, Uint8List imageData) {
-    LatLng latLng = LatLng(newLocalData.latitude, newLocalData.longitude);
+  void updateMarkerAndCircle(LocationData newLocalData, Uint8List imageData) {
+    LatLng latlng = LatLng(newLocalData.latitude, newLocalData.longitude);
     this.setState(() {
       marker = Marker(
           markerId: MarkerId("home"),
-          position: latLng,
+          position: latlng,
           rotation: newLocalData.heading,
           draggable: false,
           zIndex: 2,
@@ -50,69 +55,75 @@ class _MapState extends State<Map> {
           circleId: CircleId("car"),
           radius: newLocalData.accuracy,
           zIndex: 1,
-          strokeColor: Colors.orangeAccent,
-          center: latLng,
-          fillColor: Colors.orangeAccent.withAlpha(70));
+          strokeColor: Colors.blue,
+          center: latlng,
+          fillColor: Colors.blue.withAlpha(70));
     });
-    }
   }
-*/
-  void getCurrentPosition() async {
-  try{
+
+  void getCurrentLocation() async {
+    try {
+
       Uint8List imageData = await getMarker();
       var location = await _locationTracker.getLocation();
 
       updateMarkerAndCircle(location, imageData);
 
-      if(_locationSubscription != null) {
+      if (_locationSubscription != null) {
         _locationSubscription.cancel();
       }
 
+
       _locationSubscription = _locationTracker.onLocationChanged().listen((newLocalData) {
-        if(mapController != null) {
-          mapController.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
+        if (_controller != null) {
+          _controller.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
+              bearing: 192.8334901395799,
               target: LatLng(newLocalData.latitude, newLocalData.longitude),
-          )
-          ));
+              tilt: 0,
+              zoom: 18.00)));
+          updateMarkerAndCircle(newLocalData, imageData);
         }
       });
 
-  }on PlatformException catch (e) {
-    if(e.code == 'PERMISSION_DENIED')
-      debugPrint("Permission Denied");
+    } on PlatformException catch (e) {
+      if (e.code == 'PERMISSION_DENIED') {
+        debugPrint("Permission Denied");
+      }
     }
+  }
+
+  @override
+  void dispose() {
+    if (_locationSubscription != null) {
+      _locationSubscription.cancel();
+    }
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GoogleMap(
+        mapType: MapType.normal,
+        initialCameraPosition: initialLocation,
+        markers: Set.of((marker != null) ? [marker] : []),
+        circles: Set.of((circle != null) ? [circle] : []),
+        onMapCreated: (GoogleMapController controller) {
+          _controller = controller;
+        },
+
+      ),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.location_searching),
+          onPressed: () {
+            getCurrentLocation();
+          }),
+    );
   }
 }
 
 
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: GoogleMap(
-          mapType: MapType.normal,
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: CameraPosition(
-            target: _initialPosition,
-            zoom: CAMERA_ZOOM,
-            bearing: CAMERA_BEARING,
-            tilt: CAMERA_TILT,
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.location_searching),
-          backgroundColor: Colors.orangeAccent,
-          onPressed: () {
-            _getCurrentLocation();
-          },
-        ),
-      ),
-    );
-  }
-
-    /* return Scaffold(
+/* return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
