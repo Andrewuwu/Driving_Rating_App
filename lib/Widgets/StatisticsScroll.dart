@@ -13,7 +13,7 @@ class _StatisticsScrollState extends State<StatisticsScroll> {
     'Parking Score',
     'Speed Score'
   ];
-  final List<int> scores = [92, 76, 78, 96];
+  final List<int> scores = [92, 68, 78, 85];
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,21 @@ class _StatisticsScrollState extends State<StatisticsScroll> {
                   height: MediaQuery.of(context).size.height * 125 / 600,
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
-                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: scores[index] < 70
+                              ? Colors.red
+                              : scores[index] < 80
+                                  ? Colors.deepOrange
+                                  : scores[index] < 90
+                                      ? Colors.yellow
+                                      : scores[index] < 101
+                                          ? Colors.lightGreenAccent
+                                          : Colors.grey,
+                          blurRadius: 10.0,
+                          spreadRadius: 2.0),
+                    ],
+                    color: Color.fromRGBO(255, 251, 230, 1.0),
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(30.0),
                       topLeft: Radius.circular(30.0),
@@ -47,7 +61,11 @@ class _StatisticsScrollState extends State<StatisticsScroll> {
                     children: <Widget>[
                       Text(
                         categories[index],
-                        style: TextStyle(fontSize: 19.0),
+                        style: TextStyle(
+                          fontSize: 19.0,
+                          decoration: TextDecoration.underline,
+                          color: Color.fromRGBO(0, 100, 175, 100),
+                        ),
                       ),
                       Text(
                         '',
@@ -58,7 +76,9 @@ class _StatisticsScrollState extends State<StatisticsScroll> {
                           Text(
                             scores[index].toString(),
                             style: TextStyle(
-                                fontSize: 55.0, fontWeight: FontWeight.bold),
+                                fontSize: 55.0,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(0, 200, 255, 100)),
                           ),
                           Positioned(
                             bottom: 5,
