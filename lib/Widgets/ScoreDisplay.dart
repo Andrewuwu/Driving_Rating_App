@@ -49,7 +49,7 @@ class _ScoreDisplayState extends State<ScoreDisplay> {
                 child: Align(
                   alignment: Alignment.center,
                   child: Text(
-                    '36' + 'min',
+                    '8' + 'min',
                     style: TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
