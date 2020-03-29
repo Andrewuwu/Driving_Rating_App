@@ -26,9 +26,10 @@ class _ScoreDisplayState extends State<ScoreDisplay> {
                 Text(
                   'Drive Score',
                   style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromRGBO(0, 230, 255, 100)),
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(0, 230, 255, 100),
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 Text(''),
