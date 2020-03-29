@@ -11,6 +11,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(35, 35, 35, 1.0),
       drawer: Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Color.fromRGBO(35, 35, 35, 1.0),
@@ -63,14 +64,11 @@ class _DashboardState extends State<Dashboard> {
           ),
         ),
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: <Widget>[
-            ScoreDisplay(),
-            StatisticsScroll(),
-          ],
-        ),
+      body: Column(
+        children: <Widget>[
+          ScoreDisplay(),
+          StatisticsScroll(),
+        ],
       ),
     );
   }
