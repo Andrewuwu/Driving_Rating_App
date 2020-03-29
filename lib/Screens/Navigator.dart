@@ -24,7 +24,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Driving Rater')),
+        appBar: AppBar(
+          title: Text('Driving Rater'),
+        ),
         body: _pages[_selectedTab],
         bottomNavigationBar: BottomNavigationBar(
             currentIndex: _selectedTab,
