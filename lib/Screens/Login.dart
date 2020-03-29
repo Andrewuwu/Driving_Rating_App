@@ -1,4 +1,4 @@
-import 'package:drivingratingapp/Screens/Navigator.dart';
+import 'package:drivingratingapp/Screens/Navigation.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -7,12 +7,15 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final TextEditingController _textController = new TextEditingController();
+  final TextEditingController _textControllerName = new TextEditingController();
+  final TextEditingController _textControllerPass = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        color: Color.fromRGBO(25, 22, 55, 1),
+        /* decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -22,10 +25,8 @@ class _LoginState extends State<Login> {
               .8
             ],
                 colors: [
-              Colors.lightBlueAccent,
-              Colors.lightBlue,
-              Colors.blue
-            ])),
+              Color.fromRGBO(25, 22, 55, 1),
+            ])),*/
         child: Container(
           height: double.infinity,
           child: SingleChildScrollView(
@@ -37,50 +38,93 @@ class _LoginState extends State<Login> {
             child: Column(
               children: <Widget>[
                 SizedBox(
-                  height: 30,
+                  height: 10,
                 ),
 
-                Image(
-                  image: AssetImage('assets/safeSpeed.png'),
+                Container(
+                  /*decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 6.0,
+                          offset: Offset(0, 2),
+                        ),
+                      ]),*/
+                  child: Image(
+                    image: AssetImage('assets/final_logo.jpg'),
+                  ),
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 50,
                 ),
 
                 Container(
                   height: 35,
-                  color: Colors.white70,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(9.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 10.0,
+                        offset: Offset(0, 5),
+                      ),
+                    ],
+                  ),
                   child: TextField(
-                    controller: _textController,
-                    decoration: InputDecoration(labelText: ('  Username')),
+                    controller: _textControllerName,
+                    decoration: InputDecoration(hintText: ('  Username')),
                   ),
                 ),
 
                 SizedBox(
-                  height: 5,
+                  height: 25,
                 ),
 
                 //username
-                SizedBox(
-                  width: 375,
-                  child: Container(
-                    height: 35,
-                    width: 300,
-                    color: Colors.white70,
-                    child: TextField(
-                      controller: _textController,
-                      decoration: InputDecoration(labelText: ('  Password')),
-                      obscureText: true,
-                    ),
+                Container(
+                  height: 35,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(9.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 10.0,
+                        offset: Offset(0, 5),
+                      ),
+                    ],
                   ),
-                ), //password
-                SizedBox(
-                  height: 30,
+                  child: TextField(
+                    controller: _textControllerPass,
+                    decoration: InputDecoration(hintText: ('  Password')),
+                    obscureText: true,
+                  ),
                 ),
-                RaisedButton(
-                  child: Text('Login'),
-                  onPressed: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MyHomePage())),
+                //password
+                SizedBox(
+                  height: 60,
+                ),
+                SizedBox(
+                  width: 400,
+                  child: RaisedButton(
+                    padding: EdgeInsets.all(15.0),
+                    elevation: 10.0,
+                    color: Colors.white,
+                    child: Text(
+                      'LOGIN',
+                      style: TextStyle(
+                          color: Color.fromRGBO(35, 35, 35, 1.0),
+                          letterSpacing: 3.0),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    onPressed: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyHomePage())),
+                  ),
                 ),
               ],
             ),
