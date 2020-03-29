@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 
 class StatisticsScroll extends StatefulWidget {
   @override
@@ -22,7 +21,7 @@ class _StatisticsScrollState extends State<StatisticsScroll> {
   Widget build(BuildContext context) {
     return Container(
       height: 250.0,
-      color: Color.fromRGBO(0, 0, 0, 50),
+      color: Color.fromRGBO(0, 0, 0, 0.8),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
@@ -48,7 +47,11 @@ class _StatisticsScrollState extends State<StatisticsScroll> {
                   padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
                   child: Column(
                     children: <Widget>[
-                      Text(categories[index]),
+                      Text(
+                        categories[index],
+                        style: TextStyle(fontSize: 19.0),
+                      ),
+                      Text(''),
                       Stack(
                         children: <Widget>[
                           Text(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:drivingratingapp/Screens/Navigator.dart';
+import 'package:drivingratingapp/Screens/Navigation.dart';
 
 void main() {
   runApp(MyApp());

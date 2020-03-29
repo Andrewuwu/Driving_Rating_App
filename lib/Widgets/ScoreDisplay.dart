@@ -18,10 +18,11 @@ class _ScoreDisplayState extends State<ScoreDisplay> {
       children: <Widget>[
         Expanded(
           child: Container(
-            height: 250.0,
-            color: Color.fromRGBO(0, 0, 0, 50),
+            height: 254.0,
+            color: Color.fromRGBO(0, 0, 0, 0.8),
             child: Column(
               children: <Widget>[
+                Text(''),
                 Text(
                   'Drive Score',
                   style: TextStyle(
@@ -30,29 +31,25 @@ class _ScoreDisplayState extends State<ScoreDisplay> {
                       color: Color.fromRGBO(0, 230, 255, 100)),
                   textAlign: TextAlign.center,
                 ),
-                Stack(
-                  children: <Widget>[
-                    Container(
-                      child: Center(
-                        child: Container(
-                          height: 100.0,
-                          width: 100.0,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            shape: BoxShape.circle,
-                            border: Border.all(),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Text(
+                Text(''),
+                Container(
+                  height: 175.0,
+                  width: 175.0,
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(0, 0, 0, 0),
+                    shape: BoxShape.circle,
+                    border: Border.all(),
+                  ),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
                       avg.toString(),
                       style: TextStyle(
                           fontSize: 75.0,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(30, 180, 255, 100)),
+                          color: Color.fromRGBO(0, 150, 255, 100)),
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),
