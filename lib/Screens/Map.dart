@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 
 
@@ -51,9 +53,11 @@ class _MapState extends State<Map> {
   double pinPillPosition = -100;
 
   Timer _timer;
+  Timer timer;
   int _start = 0;
   int _end = 0;
   double _speed = 0;
+  double _value=20;
 
   PinInformation currentlySelectedPin = PinInformation(
     pinPath: '',
@@ -92,7 +96,7 @@ class _MapState extends State<Map> {
     );
   }
   void endTimer(LocationData newLocalData, LocationData newLocalData1) {
-    getSpeed(newLocalData, newLocalData1, (_start-_end));
+    _value = getSpeed(newLocalData, newLocalData1, (_start-_end));
     _timer.cancel();
     startTimer();
 
@@ -103,7 +107,7 @@ class _MapState extends State<Map> {
     super.dispose();
   }
 
-  void getSpeed(LocationData newLocalData, LocationData newLocalData1, int time) {
+  double getSpeed(LocationData newLocalData, LocationData newLocalData1, int time) {
     double lat1 = newLocalData.latitude;
     double lat2 = newLocalData1.latitude;
     double long1 = newLocalData.longitude;
@@ -128,6 +132,7 @@ class _MapState extends State<Map> {
 
     double theta = acos(cos_theta);
     _speed = (r*theta/time);
+    return _speed;
   }
 
   void setSourceAndDestinationIcons() async {
@@ -196,7 +201,7 @@ class _MapState extends State<Map> {
 
     } on PlatformException catch (e) {
       if (e.code == 'PERMISSION_DENIED') {
-        debugPrint("Permission Denied");
+        debugPrint("Permission denied");
       }
     }
   }
@@ -210,27 +215,68 @@ class _MapState extends State<Map> {
     super.dispose();
   }
 
+
+
+  Widget _speedometerPanel(){
+    return Scaffold(
+        body: Center(
+            child: Container(
+                color: Color.fromRGBO(35, 35, 35, 1.0),
+                child: SfRadialGauge(
+                    axes: <RadialAxis>[
+                      RadialAxis(minimum: 0, maximum: 100, labelOffset: 30,
+                          axisLineStyle: AxisLineStyle(
+                              thicknessUnit: GaugeSizeUnit.factor,thickness: 0.03),
+                          majorTickStyle: MajorTickStyle(length: 6,thickness: 4,color: Colors.white),
+                          minorTickStyle: MinorTickStyle(length: 3,thickness: 3,color: Colors.white),
+                          axisLabelStyle: GaugeTextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 14 ),
+                          ranges: <GaugeRange>[
+                            GaugeRange(startValue: 0, endValue: 100, sizeUnit: GaugeSizeUnit.factor,startWidth: 0.03,endWidth: 0.03,
+                                gradient: SweepGradient(
+                                    colors: const<Color>[Colors.green,Colors.yellow,Colors.red],
+                                    stops: const<double>[0.0,0.5,1]))],
+                          pointers: <GaugePointer>[NeedlePointer(value:_value, needleLength: 0.95, enableAnimation: true,
+                              animationType: AnimationType.ease, needleStartWidth: 1.5, needleEndWidth: 6, needleColor: Colors.red,
+                              knobStyle: KnobStyle(knobRadius: 0.09))],
+                          annotations: <GaugeAnnotation>[
+                            GaugeAnnotation(widget: Container(child:
+                            Column(
+                                children: <Widget>[
+                                  Text(_value.toString(), style: TextStyle(color: Colors.white, fontSize: 25,fontWeight: FontWeight.bold)),
+                                  //SizedBox(height: 10),
+                                  Text('mph', style: TextStyle(color: Colors.white, fontSize: 12,fontWeight: FontWeight.bold))]
+                            )), angle: 90, positionFactor: 0.75)]
+
+                            )]
+                )
+            )
+        )
+            );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: initialLocation,
+    return
+      SlidingUpPanel(
+        panel: _speedometerPanel(),
+          color: Colors.black38,
+          maxHeight: 230,
+          minHeight: 20,
+          body: Scaffold(
+          body: GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: initialLocation,
 
-        markers: Set.of((marker != null) ? [marker] : []),
-        circles: Set.of((circle != null) ? [circle] : []),
-        onMapCreated: (GoogleMapController controller) {
-          _controller = controller;
-        },
+            markers: Set.of((marker != null) ? [marker] : []),
+            circles: Set.of((circle != null) ? [circle] : []),
+            onMapCreated: (GoogleMapController controller) {
+              _controller = controller;
+              getCurrentLocation();
+            },
+          ),
+        ),
+      );
 
-      ),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.blue,
-          child: (Icon(Icons.location_searching)),
-          onPressed: () {
-            getCurrentLocation();
-          }),
-    );
   }
 }
 
